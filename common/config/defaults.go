@@ -1,3 +1,3 @@
-package common
+package config
 
-const DefaultServer = "http://23.227.187.40:9000/"
+const DefaultServer = "http://23.227.187.40:9000"

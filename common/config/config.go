@@ -8,20 +8,22 @@ import (
 	"io/ioutil"
 	"path"
 	"net/http"
+	"strings"
 )
 
 func Id() string {
-	file := path.Join(home(), ".config", "pbcp", "id")
-	err := os.MkdirAll(file)
+	dir := path.Join(home(), ".config", "pbcp")
+	file := path.Join(dir, "id")
+	err := os.MkdirAll(dir, 0700)
 	common.Fatal(err)
 
 	if _, err := os.Stat(file); err == nil {
 		contents, err := ioutil.ReadFile(file)
 		common.Fatal(err)
-		return string(contents)
+		return strings.TrimSpace(string(contents))
 	}
 
-	res, err := http.Get(path.Join(Server(), "register"))
+	res, err := http.Get(strings.Join([]string{Server(), "register"}, "/"))
 	common.Fatal(err)
 
 	id, err := ioutil.ReadAll(res.Body)
@@ -30,12 +32,13 @@ func Id() string {
 	err = ioutil.WriteFile(file, id, 0600)
 	common.Fatal(err)
 
-	return string(id)
+	return strings.TrimSpace(string(id))
 }
 
 func Server() string {
-	file := path.Join(home(), ".config", "pbcp", "server")
-	err := os.MkdirAll(file)
+	dir := path.Join(home(), ".config", "pbcp")
+	file := path.Join(dir, "server")
+	err := os.MkdirAll(dir, 0700)
 	common.Fatal(err)
 
 	if _, err := os.Stat(file); err == nil {
