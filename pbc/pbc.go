@@ -7,7 +7,6 @@ import (
 	"errors"
 	"net/http"
 	"os"
-	_ "io"
 	"strings"
 )
 
@@ -16,16 +15,12 @@ const MIMEType = "application/octet-stream"
 func main() {
 	id := config.Id()
 
-	_ = strings.Join([]string{config.Server(), "board", id}, "/")
-
 	res, err := http.Post(
-		"http://httpbin.org/post",
+		strings.Join([]string{config.Server(), "board", id}, "/"),
 		MIMEType,
 		os.Stdin,
 	)
 	common.Fatal(err)
-
-	// io.Copy(os.Stderr, res.Body)
 
 	switch res.StatusCode {
 	case 400:
