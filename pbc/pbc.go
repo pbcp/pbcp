@@ -25,6 +25,8 @@ func main() {
 	switch res.StatusCode {
 	case 400:
 		usage()
+	case 413:
+		common.Fatal(errors.New("Maximum file size exceeded!"))
 	case 500:
 		common.Fatal(errors.New("Internal server error!"))
 	}
