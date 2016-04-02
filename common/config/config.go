@@ -3,11 +3,11 @@ package config
 import (
 	"github.com/pbcp/pbcp/common"
 
+	"io/ioutil"
+	"net/http"
 	"os"
 	"os/user"
-	"io/ioutil"
 	"path"
-	"net/http"
 	"strings"
 )
 

@@ -4,12 +4,12 @@ import (
 	"github.com/pbcp/pbcp/common"
 	"github.com/pbcp/pbcp/common/config"
 
-	"net/http"
-	"io"
 	"errors"
+	"io"
+	"net/http"
 	"os"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 func main() {
